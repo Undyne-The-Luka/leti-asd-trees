@@ -13,6 +13,7 @@ public:
     Node * right;
 
     int height();
+    void print();
 };
 
 class Tree {

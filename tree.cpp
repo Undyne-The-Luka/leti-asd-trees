@@ -2,7 +2,7 @@
 #include <iostream>
 #include <algorithm>
 
-void print_n_times(char n);
+void print_n_times(char char_to_print, int n);
 
 Node::Node(char d, int dep) : data{d},depth{dep},left{nullptr},center{nullptr},right{nullptr}
 {
@@ -15,6 +15,17 @@ int Node::height()
     int r_h = right ? right->height() : -1;
     return std::max(l_h,std::max(c_h,r_h)) + 1;
 }
+
+void Node::print()
+{
+    print_n_times(' ', (depth-1)*4);
+    if (depth > 0) std::cout << "L___";
+    std::cout << data << std::endl;
+    if (left) left->print();
+    if (center) center->print();
+    if (right) right->print();
+}
+
 
 Node::~Node()
 {
@@ -37,35 +48,25 @@ void Tree::add_child(Node* parent)
     bool want_more = depth < rand() % 6;
     if (want_more) {
         parent->left = new Node{++last_tag, depth};
+        add_child(parent->left);
     }
 
-    want_more = rand() % 6 + 1;
+    want_more = depth < rand() % 6;
     if (want_more) {
         parent->center = new Node{++last_tag, depth};
+        add_child(parent->center);
     }
-    want_more = rand() % 6 + 1;
+    want_more = depth < rand() % 6;
     if (want_more) {
         parent->right = new Node{++last_tag, depth};
+        add_child(parent->right);
     }
 
 }
 
 void Tree::print()
 {
-    const int OUTPUT_WIDTH = 100;
-    int current_output_width = 1;
-
-    std::cout <<
-
-    auto current_node = root;
-    while (current_node) {
-        auto left_node_data = current_node->left ? current_node->left->data : '\0';
-        auto center_node_data = current_node->center ? current_node->center->data : '\0';
-        auto right_node_data = current_node->right ? current_node->right->data : '\0';
-
-        std::cout << "*" << left_node_data << "*" << center_node_data << "*" << right_node_data << std::endl;
-
-    }
+    if (root) root->print();
 }
 
 void Tree::stright_walk()
@@ -76,4 +77,10 @@ void Tree::wide_walk()
 {
 }
 
+void print_n_times(char char_to_print, int n)
+{
+    for (int i = 0; i < n; i++) {
+        std::cout << char_to_print;
+    }
+}
 
