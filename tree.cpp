@@ -21,9 +21,16 @@ void Node::print()
     print_n_times(' ', (depth-1)*4);
     if (depth > 0) std::cout << "L___";
     std::cout << data << std::endl;
-    if (left) left->print();
-    if (center) center->print();
-    if (right) right->print();
+    if (!(left || center || right)) return;
+    if (left) left->print(); else print_empty_child();
+    if (center) center->print(); else print_empty_child();
+    if (right) right->print();else print_empty_child();
+}
+
+void Node::print_empty_child()
+{
+    print_n_times(' ', (depth)*4);
+    std::cout << "L___*" << std::endl;
 }
 
 

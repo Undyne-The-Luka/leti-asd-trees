@@ -14,6 +14,7 @@ public:
 
     int height();
     void print();
+    void print_empty_child();
 };
 
 class Tree {
