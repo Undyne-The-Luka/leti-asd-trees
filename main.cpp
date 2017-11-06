@@ -7,8 +7,11 @@ int main() {
     Tree tr{};
 
     tr.print();
-    //tr.stright_walk();
-    //tr.wide_walk();
+	std::cout << "\n";
+    tr.wide_walk();
+	std::cout << "\n";
+	tr.hight();
+	std::cout << "\n";
 
 
     std::cout << "Goodbye, world!" << std::endl;

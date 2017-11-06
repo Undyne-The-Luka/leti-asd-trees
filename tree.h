@@ -34,7 +34,7 @@ public:
     void add_child(Node * parent);
     void print();
 
-    void stright_walk();
+    void hight();
     void wide_walk();
 
     friend class Node;
