@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "tree.h"
 #include <iostream>
 #include <algorithm>
@@ -38,6 +37,9 @@ void Node::print_empty_child()
 
 Node::~Node()
 {
+    delete left;
+    delete center;
+    delete right;
 }
 
 
@@ -48,6 +50,7 @@ Tree::Tree() : last_tag{'A'}, root{new Node{last_tag, 0}}, num_of_childs{0}
 
 Tree::~Tree()
 {
+    delete root;
 }
 
 
@@ -84,20 +87,20 @@ void Tree::hight()
 	int max_depth = 0;
 	if (!root->center)
 	{
-		std::cout << "Central tree is not exist";
+		std::cout << "Central tree is not exist!\n";
 		return;
 	}
-	std::queue <Node*> Q;
-	Q.push(root->center);
-	while (Q.empty() == 0)
+	std::queue <Node*> nodes_queue;
+	nodes_queue.push(root->center);
+	while (!nodes_queue.empty())
 	{
-		Node* current_node = Q.front();
-		Q.pop();
+		Node* current_node = nodes_queue.front();
+		nodes_queue.pop();
 		if (max_depth < current_node->depth)
 			max_depth = current_node->depth;
-		if (current_node->left) Q.push(current_node->left);
-		if (current_node->center) Q.push(current_node->center);
-		if (current_node->right) Q.push(current_node->right);
+		if (current_node->left) nodes_queue.push(current_node->left);
+		if (current_node->center) nodes_queue.push(current_node->center);
+		if (current_node->right) nodes_queue.push(current_node->right);
 	}
 	std::cout << "Central tree hight = " << max_depth - 1;
 	std::cout << "\n";
