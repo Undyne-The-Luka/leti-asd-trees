@@ -34,7 +34,7 @@ public:
     void add_child(Node * parent);
     void print();
 
-    void hight();
+    void center_subtree_height();
     void wide_walk();
 
     friend class Node;

@@ -82,12 +82,12 @@ void Tree::print()
 	std::cout << "\n";
 }
 
-void Tree::hight()
+void Tree::center_subtree_height()
 {
 	int max_depth = 0;
 	if (!root->center)
 	{
-		std::cout << "Central tree is not exist!\n";
+		std::cout << "Central tree does not exist. Sorry.\n";
 		return;
 	}
 	std::queue <Node*> nodes_queue;
@@ -102,22 +102,22 @@ void Tree::hight()
 		if (current_node->center) nodes_queue.push(current_node->center);
 		if (current_node->right) nodes_queue.push(current_node->right);
 	}
-	std::cout << "Central tree hight = " << max_depth - 1;
+	std::cout << "Central tree hight: " << max_depth - 1;
 	std::cout << "\n";
 }
 
 void Tree::wide_walk()
 {
-	std::queue <Node*> Q;
-	Q.push(root);
-	while (Q.empty() == 0)
+	std::queue <Node*> nodes_queue;
+	nodes_queue.push(root);
+	while (!nodes_queue.empty())
 	{
-		Node* current_node = Q.front();
-		Q.pop();
+		Node* current_node = nodes_queue.front();
+		nodes_queue.pop();
 		std::cout << current_node->data << " ";
-		if (current_node->left) Q.push(current_node->left);
-		if (current_node->center) Q.push(current_node->center);
-		if (current_node->right) Q.push(current_node->right);
+		if (current_node->left) nodes_queue.push(current_node->left);
+		if (current_node->center) nodes_queue.push(current_node->center);
+		if (current_node->right) nodes_queue.push(current_node->right);
 	}
 	std::cout << "\n";
 }
