@@ -1,16 +1,17 @@
-#include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "tree.h"
 
 int main() {
-    srand(time(NULL));
+	srand(time(NULL));
 
-    Tree tr{};
+	Tree random_tree{};
 
-    tr.print();
-    //tr.stright_walk();
-    //tr.wide_walk();
+	random_tree.print();
+	random_tree.wide_walk();
+    random_tree.center_subtree_height();
 
 
-    std::cout << "Goodbye, world!" << std::endl;
-    return 0;
+	//std::cout << "Goodbye, world!" << std::endl;
+	return 0;
 }
