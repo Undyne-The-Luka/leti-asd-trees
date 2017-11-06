@@ -2,18 +2,15 @@
 #include "tree.h"
 
 int main() {
-    srand(time(NULL));
+	srand(time(NULL));
 
-    Tree tr{};
+	Tree tr{};
 
-    tr.print();
-	std::cout << "\n";
-    tr.wide_walk();
-	std::cout << "\n";
+	tr.print();
+	tr.wide_walk();
 	tr.hight();
-	std::cout << "\n";
 
 
-    std::cout << "Goodbye, world!" << std::endl;
-    return 0;
+	std::cout << "Goodbye, world!" << std::endl;
+	return 0;
 }

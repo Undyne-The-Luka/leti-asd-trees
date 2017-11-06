@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "tree.h"
 #include <iostream>
 #include <algorithm>
@@ -75,6 +76,7 @@ void Tree::add_child(Node* parent)
 void Tree::print()
 {
     if (root) root->print();
+	std::cout << "\n";
 }
 
 void Tree::hight()
@@ -85,12 +87,12 @@ void Tree::hight()
 		std::cout << "Central tree is not exist";
 		return;
 	}
-	const int maxQ = 20;
-	queue <Node*> Q(maxQ);
+	std::queue <Node*> Q;
 	Q.push(root->center);
-	while (!Q.empty)
+	while (Q.empty() == 0)
 	{
-		Node* current_node = Q.pop();
+		Node* current_node = Q.front();
+		Q.pop();
 		if (max_depth < current_node->depth)
 			max_depth = current_node->depth;
 		if (current_node->left) Q.push(current_node->left);
@@ -98,21 +100,23 @@ void Tree::hight()
 		if (current_node->right) Q.push(current_node->right);
 	}
 	std::cout << "Central tree hight = " << max_depth - 1;
+	std::cout << "\n";
 }
 
 void Tree::wide_walk()
 {
-	const int maxQ = 20;
-	queue <Node*> Q(maxQ);
+	std::queue <Node*> Q;
 	Q.push(root);
-	while (!Q.empty)
+	while (Q.empty() == 0)
 	{
-		Node* current_node = Q.pop();
+		Node* current_node = Q.front();
+		Q.pop();
 		std::cout << current_node->data << " ";
 		if (current_node->left) Q.push(current_node->left);
 		if (current_node->center) Q.push(current_node->center);
 		if (current_node->right) Q.push(current_node->right);
 	}
+	std::cout << "\n";
 }
 
 void print_n_times(char char_to_print, int n)
