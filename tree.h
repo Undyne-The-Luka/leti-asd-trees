@@ -1,6 +1,8 @@
 #ifndef TREE_H
 #define TREE_H
 
+#include <string>
+
 class Node {
 public:
     Node () = delete;
@@ -20,10 +22,10 @@ public:
 class Tree {
     char last_tag;
     Node * root;
-    int num_of_childs;
 
 public:
     Tree ();
+    Tree (const std::string);
     Tree (const Tree&) = delete;
     Tree (Tree&&) = delete;
     Tree operator = (const Tree&) = delete;
@@ -31,7 +33,8 @@ public:
     ~Tree();
 
 public:
-    void add_child(Node * parent);
+    void add_random_childs_to(Node * parent);
+
     void print();
 
     void center_subtree_height();

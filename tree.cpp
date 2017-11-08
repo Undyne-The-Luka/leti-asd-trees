@@ -43,10 +43,18 @@ Node::~Node()
 }
 
 
-Tree::Tree() : last_tag{'A'}, root{new Node{last_tag, 0}}, num_of_childs{0}
+Tree::Tree() : last_tag{'A'}, root{new Node{last_tag, 0}}//, num_of_childs{0}
 {
-    add_child(root);
+    add_random_childs_to(root);
 }
+
+Tree::Tree(const std::string str) : last_tag{'A'}, root{nullptr}
+{
+    for (auto ch : str) {
+        //add_children_to();
+    }
+}
+
 
 Tree::~Tree()
 {
@@ -54,24 +62,24 @@ Tree::~Tree()
 }
 
 
-void Tree::add_child(Node* parent)
+void Tree::add_random_childs_to(Node* parent)
 {
     int depth = parent->depth + 1;
     bool want_more = depth < rand() % 6;
     if (want_more) {
         parent->left = new Node{++last_tag, depth};
-        add_child(parent->left);
+        add_random_childs_to(parent->left);
     }
 
     want_more = depth < rand() % 6;
     if (want_more) {
         parent->center = new Node{++last_tag, depth};
-        add_child(parent->center);
+        add_random_childs_to(parent->center);
     }
     want_more = depth < rand() % 6;
     if (want_more) {
         parent->right = new Node{++last_tag, depth};
-        add_child(parent->right);
+        add_random_childs_to(parent->right);
     }
 
 }
@@ -85,7 +93,7 @@ void Tree::print()
 void Tree::center_subtree_height()
 {
 	int max_depth = 0;
-	if (!root->center)
+	if (!root || !root->center)
 	{
 		std::cout << "Central tree does not exist. Sorry.\n";
 		return;
