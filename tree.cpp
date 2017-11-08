@@ -43,16 +43,9 @@ Node::~Node()
 }
 
 
-Tree::Tree() : last_tag{'A'}, root{new Node{last_tag, 0}}//, num_of_childs{0}
+Tree::Tree(int depth_limit) : last_tag{'A'}, root{new Node{last_tag, 0}}, num_of_children{0}
 {
-    add_random_childs_to(root);
-}
-
-Tree::Tree(const std::string str) : last_tag{'A'}, root{nullptr}
-{
-    for (auto ch : str) {
-        //add_children_to();
-    }
+    add_random_children_to_parent_until_depth_limit_reached(root, depth_limit);
 }
 
 
@@ -62,24 +55,27 @@ Tree::~Tree()
 }
 
 
-void Tree::add_random_childs_to(Node* parent)
+void Tree::add_random_children_to_parent_until_depth_limit_reached(Node* parent, int depth_limit)
 {
     int depth = parent->depth + 1;
-    bool want_more = depth < rand() % 6;
+    bool want_more = depth < rand() % depth_limit;
     if (want_more) {
         parent->left = new Node{++last_tag, depth};
-        add_random_childs_to(parent->left);
+        num_of_children++;
+        add_random_children_to_parent_until_depth_limit_reached(parent->left, depth_limit);
     }
 
-    want_more = depth < rand() % 6;
+    want_more = depth < rand() % depth_limit;
     if (want_more) {
         parent->center = new Node{++last_tag, depth};
-        add_random_childs_to(parent->center);
+        num_of_children++;
+        add_random_children_to_parent_until_depth_limit_reached(parent->center, depth_limit);
     }
-    want_more = depth < rand() % 6;
+    want_more = depth < rand() % depth_limit;
     if (want_more) {
         parent->right = new Node{++last_tag, depth};
-        add_random_childs_to(parent->right);
+        num_of_children++;
+        add_random_children_to_parent_until_depth_limit_reached(parent->right, depth_limit);
     }
 
 }

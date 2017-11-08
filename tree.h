@@ -22,10 +22,11 @@ public:
 class Tree {
     char last_tag;
     Node * root;
+    int num_of_children;
 
 public:
-    Tree ();
-    Tree (const std::string);
+    Tree () = delete;
+    Tree (int);
     Tree (const Tree&) = delete;
     Tree (Tree&&) = delete;
     Tree operator = (const Tree&) = delete;
@@ -33,7 +34,7 @@ public:
     ~Tree();
 
 public:
-    void add_random_childs_to(Node * parent);
+    void add_random_children_to_parent_until_depth_limit_reached(Node* parent, int depth_limit);
 
     void print();
 
