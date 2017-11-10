@@ -26,7 +26,7 @@ class Tree {
 
 public:
     Tree () = delete;
-    Tree (int);
+    Tree (int, bool);
     Tree (const Tree&) = delete;
     Tree (Tree&&) = delete;
     Tree operator = (const Tree&) = delete;
@@ -35,6 +35,7 @@ public:
 
 public:
     void add_random_children_to_parent_until_depth_limit_reached(Node* parent, int depth_limit);
+    void add_children_if_requested(Node* parent, int depth_limit);
 
     void print();
 

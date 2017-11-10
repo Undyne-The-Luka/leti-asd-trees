@@ -43,9 +43,13 @@ Node::~Node()
 }
 
 
-Tree::Tree(int depth_limit) : last_tag{'A'}, root{new Node{last_tag, 0}}, num_of_children{0}
+Tree::Tree(int depth_limit, bool random) : last_tag{'A'}, root{new Node{last_tag, 0}}, num_of_children{0}
 {
-    add_random_children_to_parent_until_depth_limit_reached(root, depth_limit);
+    if (random) {
+        add_random_children_to_parent_until_depth_limit_reached(root, depth_limit);
+    } else {
+        add_children_if_requested(root, depth_limit);
+    }
 }
 
 
@@ -78,6 +82,39 @@ void Tree::add_random_children_to_parent_until_depth_limit_reached(Node* parent,
         add_random_children_to_parent_until_depth_limit_reached(parent->right, depth_limit);
     }
 
+}
+
+void Tree::add_children_if_requested(Node* parent, int depth_limit)
+{
+    using namespace std;
+
+    int depth = parent->depth + 1;
+    if (depth < depth_limit) {
+        bool want_more = 0;
+        cout << "Add left child? ";
+        cin >> want_more;
+        if (want_more) {
+            parent->left = new Node{++last_tag, depth};
+            num_of_children++;
+            add_children_if_requested(parent->left, depth_limit);
+        }
+
+        cout << "Add center child? ";
+        cin >> want_more;
+        if (want_more) {
+            parent->center = new Node{++last_tag, depth};
+            num_of_children++;
+            add_children_if_requested(parent->center, depth_limit);
+        }
+
+        cout << "Add right child? ";
+        cin >> want_more;
+        if (want_more) {
+            parent->right = new Node{++last_tag, depth};
+            num_of_children++;
+            add_children_if_requested(parent->right, depth_limit);
+        }
+    }
 }
 
 void Tree::print()

@@ -16,10 +16,13 @@ int main() {
         throw out_of_range("Kuda stoko vershin!");
     }
 
-	Tree random_tree{max_tree_depth};
+    cout << "Random (1) or custom tree (0)? ";
+    bool random = false;
+    cin >> random;
+    Tree random_tree{max_tree_depth, random};
 
-	random_tree.print();
-	random_tree.wide_walk();
+    random_tree.print();
+    random_tree.wide_walk();
     random_tree.center_subtree_height();
 
 
